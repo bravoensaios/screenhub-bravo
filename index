@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>ScreenHub Bravo</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #screenhub {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <iframe
+    id="screenhub"
+    src="https://v2.screenhub.com/player/index.html"
+    allow="autoplay; fullscreen"
+    allowfullscreen>
+  </iframe>
+</body>
+</html>
