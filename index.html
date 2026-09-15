@@ -2,50 +2,88 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>ScreenHub Bravo</title>
 
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="./manifest.json">
 
   <style>
     html, body {
-      width: 100%;
-      height: 100%;
       margin: 0;
       padding: 0;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       background: #000;
     }
 
     #screenhub {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       border: 0;
-      margin: 0;
-      padding: 0;
-      display: block;
+      background: #000;
+    }
+
+    #fullscreenButton {
+      position: fixed;
+      z-index: 999999;
+      left: 50%;
+      bottom: 40px;
+      transform: translateX(-50%);
+
+      padding: 18px 32px;
+      border: 0;
+      border-radius: 8px;
+
+      background: #ffffff;
+      color: #000000;
+
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      font-weight: bold;
+
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
+
   <iframe
     id="screenhub"
     src="https://v2.screenhub.com/player/index.html"
-    allow="autoplay; fullscreen"
-    allowfullscreen>
+    allow="fullscreen">
   </iframe>
+
+  <button id="fullscreenButton">
+    ABRIR SCREENHUB
+  </button>
+
   <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js');
-  }
-</script>
+    const button = document.getElementById('fullscreenButton');
+
+    button.addEventListener('click', async () => {
+      try {
+        await document.documentElement.requestFullscreen();
+        button.style.display = 'none';
+      } catch (error) {
+        console.error('Erro ao entrar em fullscreen:', error);
+      }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) {
+        button.style.display = 'block';
+      }
+    });
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js');
+    }
+  </script>
+
 </body>
-</html>
+</html
